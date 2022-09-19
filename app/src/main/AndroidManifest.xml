@@ -15,11 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Paging"
         tools:targetApi="31">
+
         <activity
             android:name=".ui.RedditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

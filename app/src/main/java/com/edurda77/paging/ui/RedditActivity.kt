@@ -1,32 +1,27 @@
 package com.edurda77.paging.ui
 
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.android.example.paging.pagingwithnetwork.reddit.paging.asMergedLoadStates
-import com.edurda77.paging.databinding.ActivityMainBinding
 import com.edurda77.paging.databinding.ActivityRedditBinding
 import com.edurda77.paging.network.RedditPostRepository
 import com.edurda77.paging.presentation.PostsAdapter
 import com.edurda77.paging.presentation.PostsLoadStateAdapter
 import com.edurda77.paging.presentation.RedditViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 
 class RedditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRedditBinding
-    //private val viewModel by viewModels<RedditViewModel>()
     private val model: RedditViewModel by viewModels {
         object : AbstractSavedStateViewModelFactory(this, null) {
             override fun <T : ViewModel> create(
@@ -34,8 +29,7 @@ class RedditActivity : AppCompatActivity() {
                 modelClass: Class<T>,
                 handle: SavedStateHandle
             ): T {
-                val repoTypeParam = intent.getIntExtra(KEY_REPOSITORY_TYPE, 0)
-                val repoType = RedditPostRepository.Type.values()[repoTypeParam]
+                val repoType = RedditPostRepository.Type.DB
                 val repo = ServiceLocator.instance(this@RedditActivity)
                     .getRepository(repoType)
                 @Suppress("UNCHECKED_CAST")
@@ -110,15 +104,6 @@ class RedditActivity : AppCompatActivity() {
                 if (it.isNotBlank()) {
                     model.showSubreddit(it)
                 }
-            }
-        }
-
-        companion object {
-            private const val KEY_REPOSITORY_TYPE = "repository_type"
-            fun intentFor(context: Context, type: RedditPostRepository.Type): Intent {
-                val intent = Intent(context, RedditActivity::class.java)
-                intent.putExtra(KEY_REPOSITORY_TYPE, type.ordinal)
-                return intent
             }
         }
 }
