@@ -54,7 +54,6 @@ class RedditActivity : AppCompatActivity() {
         }
 
         private fun initAdapter() {
-            //val glide = GlideApp.with(this)
             adapter = PostsAdapter()
             binding.rvList.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = PostsLoadStateAdapter(adapter),

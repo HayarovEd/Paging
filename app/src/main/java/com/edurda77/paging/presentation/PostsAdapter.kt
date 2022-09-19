@@ -1,9 +1,11 @@
 
 package com.edurda77.paging.presentation
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.edurda77.paging.R
 import com.edurda77.paging.entity.RedditPost
 import com.edurda77.paging.network.RedditApi.Companion.create
 
@@ -28,7 +30,10 @@ class PostsAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditPostViewHolder {
-        return RedditPostViewHolder.create(parent)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.reddit_post_item, parent, false)
+        return RedditPostViewHolder(view)
+    //return RedditPostViewHolder.create(parent)
     }
 
     companion object {

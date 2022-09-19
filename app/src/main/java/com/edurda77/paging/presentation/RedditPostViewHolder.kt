@@ -3,12 +3,14 @@ package com.edurda77.paging.presentation
 
 import android.content.Intent
 import android.net.Uri
+import android.text.method.TextKeyListener.clear
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.edurda77.paging.R
 import com.edurda77.paging.entity.RedditPost
 
@@ -34,16 +36,16 @@ class RedditPostViewHolder(view: View)
         subtitle.text = itemView.context.resources.getString(R.string.post_subtitle,
                 post?.author ?: "unknown")
         score.text = "${post?.score ?: 0}"
-        /*if (post?.thumbnail?.startsWith("http") == true) {
+
+        if (post?.thumbnail?.startsWith("http") == true) {
             thumbnail.visibility = View.VISIBLE
-            glide.load(post.thumbnail)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_insert_photo_black_48dp)
-                    .into(thumbnail)
+            Glide.with(this.itemView.context)
+                .load(post.thumbnail)
+                .placeholder(R.drawable.ic_insert_photo_black_48dp)
+                .into(thumbnail)
         } else {
             thumbnail.visibility = View.GONE
-            glide.clear(thumbnail)
-        }*/
+        }
     }
 
     companion object {
