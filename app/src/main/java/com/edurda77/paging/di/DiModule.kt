@@ -1,6 +1,9 @@
+/*
 package com.edurda77.paging.di
 
 import com.edurda77.paging.network.RedditApi
+import com.edurda77.paging.network.RedditPostRepository
+import com.edurda77.paging.repository.InMemoryByItemRepository
 import com.edurda77.paging.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -30,7 +33,7 @@ object DiModule {
             .build()
             .create(RedditApi::class.java)
     }
-    /*@Provides
+    @Provides
     @Singleton
-    fun provideMainRemoteData(cbrApi: CbrApi) : RepositoryValuteImpl = RepositoryValuteImpl(cbrApi)*/
-}
+    fun provideMainRemoteData(redditApi: RedditApi) : InMemoryByItemRepository = InMemoryByItemRepository(redditApi)
+}*/
